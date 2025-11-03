@@ -1,0 +1,589 @@
+/* ##################################################################### */
+/* ############################ STYLES FONT ############################ */
+/* ##################################################################### */
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?g80gi9');
+  src:  url('fonts/icomoon.eot?g80gi9#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?g80gi9') format('truetype'),
+    url('fonts/icomoon.woff?g80gi9') format('woff'),
+    url('fonts/icomoon.svg?g80gi9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.annie-use-your-telescope-regular {
+  font-family: "Annie Use Your Telescope", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+/* ##################################################################### */
+/* ############################# VARIABLES ############################# */
+/* ##################################################################### */
+
+:root{
+--gt-text-light-color: #ffffff;
+--gt-background-color: #d5e9e0;
+--gt-box-color01: #96b7a7;
+--gt-box-color02: #648978;
+--gt-text-link-color: #365f4f;
+--gt-text-title-color: #143a2a;
+--gt-text-color-base: #071c1a;
+--gt-icones-contact-color: #71bd9b;
+}
+
+/* ##################################################################### */
+/* ########################### STYLES DE BASE ########################## */
+/* ##################################################################### */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 3em;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+  background-color: var(--gt-background-color);
+  font-size: 1.2em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+a{
+    color: var(--gt-text-link-color);
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: "Annie Use Your Telescope", cursive;
+}
+
+h1{
+  margin: 1em 50px;
+  max-width: 1500px;
+  color: var(--gt-text-title-color);
+  text-align: right;  
+  font-size: 3em;
+
+  @media (min-width: 1025px){
+    margin: 2em 50px;
+    font-size: 4em;
+  }
+
+  @media (min-width: 1500px){
+    margin: 2em auto;
+    font-size: 5em;
+  }
+
+}
+
+h2{
+  padding: 1em 0;
+  text-align: left;
+  font-size: 2em;
+  
+  @media (min-width: 1025px){
+    font-size: 3em;
+  }
+}
+
+h3, h4{
+  text-transform: uppercase;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+img{
+  max-width: 100%;
+  vertical-align: baseline;
+
+  /*À prevoir à chaque fois*/
+}
+
+
+/* ##################################################################### */
+/* ######################### CLASSES UTILITAIRE ######################## */
+/* ##################################################################### */
+
+
+.container{
+  max-width: 1500px;
+
+  @media (min-width: 1500px){
+    margin: 0 auto;
+  }
+
+}
+
+.button{
+  height: 3em;
+  width: auto;
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 3em;
+}
+
+/* ##################################################################### */
+/* ############################# BACKGROUND ############################ */
+/* ##################################################################### */
+
+#sec1, h1{
+  position: relative;
+}
+
+.content__background__sec1{
+  position: absolute;
+  min-height: 100vh;
+  min-width: 100vw;
+
+  @media (min-width: 1025px){
+    background-image: url(../img/background_01_1920px.png);
+    background-repeat: no-repeat;
+  }
+}
+
+#sec2{
+  position: relative;
+  min-height: 100vh;
+  min-width: 100vw;
+   @media (min-width: 1025px){
+    
+  }
+}
+
+.content__background__sec2{
+  position: absolute;
+  min-height: 100vh;
+  min-width: 100vw;
+
+  @media (min-width: 1025px){
+    background-image: url(../img/background_02_1920px.png);
+    background-repeat: no-repeat;
+  }
+}
+
+#sec3{
+  position: relative;
+}
+
+.content__background__sec3{
+  position: absolute;
+  min-height: 100vh;
+  min-width: 100vw;
+
+  @media (min-width: 1025px){
+    background-image: url(../img/background_03_1920px.png);
+    background-repeat: no-repeat;
+  }
+}
+
+#sec5{
+  position: relative;
+}
+
+.content__background__sec5{
+  position: absolute;
+  min-height: 100vh;
+  min-width: 100vw;
+  
+  @media (min-width: 1025px){
+    background-image: url(../img/background_04_1920px.png);
+    background-repeat: no-repeat;
+    
+  }
+}
+
+
+/* ##################################################################### */
+/* ############################## BANNIÈRE ############################# */
+/* ##################################################################### */
+
+.banner .container{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 1rem;
+
+  @media (min-width: 1025px){
+    grid-template-columns: 1fr 7fr;
+    
+  }
+}
+
+.is-fixed{
+
+  @media (min-width: 1025px){
+  position: fixed;
+  z-index: 120000;
+  display: flex;
+  margin: 0;
+  min-width: 100vw;
+  }
+  
+}
+
+
+.banner__title{
+  justify-self: center;
+  align-self: center;
+
+  padding: 1rem;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+
+  font-weight: bold;
+  text-transform: uppercase;
+
+}
+
+.banner__nav{
+  z-index: 10000;
+  grid-column: 1 / span 2;
+  align-self: start;
+  justify-self: center;
+  padding: 1rem 0;
+  
+
+  @media (min-width: 1025px){
+    justify-self: center;
+  
+  }
+}
+
+.banner__nav a{
+  
+  padding: 0 1em;
+  color: var(--gt-text-link-color);
+  text-align-last: justify;
+  text-decoration: none;
+
+  @media (min-width: 1025px){
+    padding: 0 3em;
+  }
+}
+
+/* ##################################################################### */
+/* ################################ MAIN ############################### */
+/* ##################################################################### */
+
+.container__viewport{
+  min-height: 100vh;
+}
+
+
+
+/* ##################################################################### */
+/* ############################### TABLE ############################### */
+/* ##################################################################### */
+tbody{
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-rows: auto;
+  @media (min-width: 1025px){
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+td{
+  display: flex;
+  padding: 2em 2rem;
+  @media (min-width: 1025px){
+
+  }
+  
+}
+
+tbody tr td:nth-child(1){
+  text-transform: uppercase;
+}
+
+
+/* ##################################################################### */
+/* ############################## TIMELINE ############################# */
+/* ##################################################################### */
+
+
+.camera{
+  position: sticky;
+  
+  @media (min-width: 1025px){
+    width: 100;
+    height: 100vh;
+  }
+}
+
+.timeline{
+  display: grid;
+  grid-template-columns: repeat(6, 220px);
+  gap: 7em;
+  transform: translate3d(0vw 0 0);
+  transform-style: preserve-3d;
+  overflow-x: visible;
+  direction: ltr;
+}
+
+.scrollChange{
+  transform: translate3d(200vw,0,0);
+}
+
+.article{
+  max-width: 400px;
+
+  @media (min-width: 1025px){
+    min-width: 220px;
+  }
+}
+
+.article__content{
+  text-align: justify;
+  font-size: 0.7em;
+}
+
+
+
+/* ##################################################################### */
+/* ############################## CONTACT ############################## */
+/* ##################################################################### */
+
+#sec5{
+  display: grid;
+  gap: 1em;
+  margin-bottom: 2em;
+
+  @media (min-width: 1025px){
+    grid-template-columns: 1fr 3fr;
+
+  }
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.sec5__linkweb{
+  grid-area: 3;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+
+  @media (min-width: 1025px){
+    grid-area: 2;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+  }
+}
+
+.sec5__form__contact{
+  @media (min-width: 1025px){
+    grid-area: 2;
+  }
+}
+
+.field-group{
+  display: grid;
+  gap: 0.5rem;
+
+  @media (min-width: 1025px){
+    grid-template-columns: 1fr 4fr;
+    align-items: center;
+  }
+}
+
+.field-group, .radio{
+  margin: 1.5rem 0;
+}
+
+.button{
+  text-align: end;
+}
+
+[type=text],
+[type=email],
+[type=submit],
+textarea{
+  
+  max-width: 1500px;
+  padding: 1em;
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 2em;
+}
+
+
+[type=submit]{
+  padding: 0.5em;
+  height: 3em;
+  width: auto;
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 2em;
+  background-color: var(--gt-text-light-color);
+  font-size: 1em;
+}
+
+
+[type=submit]:active{
+  background-color: var(--gt-box-color02);
+}
+
+[type=radio] {
+  appearance: none;
+
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid black;
+  transition: 0.2s all linear;
+  margin-right: 5px;
+  top: 4px;
+}
+
+.radio > label{
+  margin: 0 10px;
+}
+
+input:checked {
+  border: 6px solid var(--gt-text-link-color);
+}
+
+/* ##################################################################### */
+/* ############################### FOOTER ############################## */
+/* ##################################################################### */
+
+.footer{
+  text-align: center;
+  font-size: 0.8em;
+}
+
+
+/* ##################################################################### */
+/* ############################# FONT TYPES ############################ */
+/* ##################################################################### */
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  font-size: 2em;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-music:before {
+  content: "\e911";
+}
+.icon-qrcode:before {
+  content: "\e938";
+}
+.icon-location:before {
+  content: "\e947";
+}
+.icon-spinner2:before {
+  content: "\e97b";
+}
+.icon-spinner8:before {
+  content: "\e981";
+}
+.icon-rocket:before {
+  content: "\e9a5";
+}
+.icon-truck:before {
+  content: "\e9b0";
+}
+.icon-sphere:before {
+  content: "\e9c9";
+}
+.icon-link:before {
+  content: "\e9cb";
+}
+.icon-attachment:before {
+  content: "\e9cd";
+}
+.icon-circle-up:before {
+  content: "\ea41";
+}
+.icon-circle-right:before {
+  content: "\ea42";
+}
+.icon-circle-down:before {
+  content: "\ea43";
+}
+.icon-circle-left:before {
+  content: "\ea44";
+}
+.icon-radio-checked:before {
+  content: "\ea54";
+}
+.icon-radio-unchecked:before {
+  content: "\ea56";
+}
+.icon-embed:before {
+  content: "\ea7f";
+}
+.icon-embed2:before {
+  content: "\ea80";
+}
+.icon-terminal:before {
+  content: "\ea81";
+}
+.icon-share2:before {
+  content: "\ea82";
+}
+.icon-mail4:before {
+  content: "\ea86";
+}
+.icon-instagram:before {
+  content: "\ea92";
+}
+.icon-whatsapp:before {
+  content: "\ea93";
+}
+.icon-youtube:before {
+  content: "\ea9d";
+}
+.icon-steam2:before {
+  content: "\eaad";
+}
+.icon-github:before {
+  content: "\eab0";
+}
+.icon-wordpress:before {
+  content: "\eab4";
+}
+.icon-linkedin:before {
+  content: "\eac9";
+}
+.icon-pinterest:before {
+  content: "\ead1";
+}
+.icon-html-five:before {
+  content: "\eae4";
+}
+.icon-css3:before {
+  content: "\eae6";
+}

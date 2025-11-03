@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Vertical to Horizontal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Sections normales (scroll vertical) */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+        }
+
+        .section-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Section horizontale - conteneur principal */
+        .horizontal-section {
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background: #1a1a1a;
+        }
+
+        /* Wrapper qui va contenir toutes les slides horizontales */
+        .horizontal-wrapper {
+            display: flex;
+            height: 100vh;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+
+        /* Chaque slide horizontale */
+        .horizontal-slide {
+            min-width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            color: white;
+        }
+
+        .slide-1 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .slide-2 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .slide-3 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .slide-4 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+        .section-3 {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+
+        /* Indicateur de scroll */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        /* Instructions */
+        .instructions {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <!-- Section normale 1 -->
+    <section class="section section-1">
+        <div>
+            <h1>Section 1</h1>
+            <p style="font-size: 0.4em; margin-top: 20px;">Scrolle vers le bas ⬇️</p>
+        </div>
+    </section>
+
+    <!-- Section horizontale -->
+    <section class="horizontal-section" id="horizontalSection">
+        <div class="instructions">
+            Continue à scroller verticalement pour naviguer horizontalement ➡️
+        </div>
+        <div class="horizontal-wrapper" id="horizontalWrapper">
+            <div class="horizontal-slide slide-1">
+                <h2>Slide 1</h2>
+            </div>
+            <div class="horizontal-slide slide-2">
+                <h2>Slide 2</h2>
+            </div>
+            <div class="horizontal-slide slide-3">
+                <h2>Slide 3</h2>
+            </div>
+            <div class="horizontal-slide slide-4">
+                <h2>Slide 4</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section normale 3 -->
+    <section class="section section-3">
+        <div>
+            <h1>Section 3</h1>
+            <p style="font-size: 0.4em; margin-top: 20px;">Tu peux continuer à scroller normalement</p>
+        </div>
+    </section>
+
+    <!-- Indicateur -->
+    <div class="scroll-indicator" id="scrollIndicator">Scroll: Vertical</div>
+
+    <script>
+        const horizontalSection = document.getElementById('horizontalSection');
+        const horizontalWrapper = document.getElementById('horizontalWrapper');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        
+        let isInHorizontalSection = false;
+        let horizontalScrollProgress = 0;
+        
+        // Calcule le nombre de slides
+        const slides = document.querySelectorAll('.horizontal-slide');
+        const totalSlides = slides.length;
+        
+        // IntersectionObserver pour détecter quand on entre/sort de la section
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Si la section est visible et occupe au moins 50% de l'écran
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                    isInHorizontalSection = true;
+                } else {
+                    isInHorizontalSection = false;
+                    scrollIndicator.textContent = 'Scroll: Vertical';
+                }
+            });
+        }, {
+            threshold: [0, 0.5, 1], // Observe à différents niveaux de visibilité
+            rootMargin: '0px'
+        });
+        
+        // Observer la section horizontale
+        observer.observe(horizontalSection);
+        
+        // Fonction pour gérer le scroll
+        function handleScroll(e) {
+            if (isInHorizontalSection) {
+                // Si on scroll vers le bas dans la section
+                if (e.deltaY > 0 && horizontalScrollProgress < totalSlides - 1) {
+                    e.preventDefault();
+                    horizontalScrollProgress += 0.05;
+                    horizontalScrollProgress = Math.min(horizontalScrollProgress, totalSlides - 1);
+                    scrollIndicator.textContent = 'Scroll: Horizontal ➡️';
+                }
+                // Si on scroll vers le haut dans la section
+                else if (e.deltaY < 0 && horizontalScrollProgress > 0) {
+                    e.preventDefault();
+                    horizontalScrollProgress -= 0.05;
+                    horizontalScrollProgress = Math.max(horizontalScrollProgress, 0);
+                    scrollIndicator.textContent = 'Scroll: Horizontal ⬅️';
+                }
+                // Si on a fini le scroll horizontal (à la fin)
+                else if (e.deltaY > 0 && horizontalScrollProgress >= totalSlides - 1) {
+                    // On laisse le scroll vertical reprendre
+                    scrollIndicator.textContent = 'Scroll: Vertical ⬇️';
+                    return;
+                }
+                // Si on est au début et on scroll vers le haut
+                else if (e.deltaY < 0 && horizontalScrollProgress <= 0) {
+                    // On laisse le scroll vertical reprendre
+                    scrollIndicator.textContent = 'Scroll: Vertical ⬆️';
+                    return;
+                }
+                
+                // Applique la transformation
+                const translateX = -horizontalScrollProgress * 100;
+                horizontalWrapper.style.transform = `translateX(${translateX}vw)`;
+            }
+        }
+        
+        // Gestion du scroll avec la molette
+        window.addEventListener('wheel', handleScroll, { passive: false });
+        
+        // Gestion du scroll tactile (mobile)
+        let touchStartY = 0;
+        
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        });
+        
+        window.addEventListener('touchmove', (e) => {
+            if (isInHorizontalSection) {
+                const touchY = e.touches[0].clientY;
+                const deltaY = touchStartY - touchY;
+                
+                if (Math.abs(deltaY) > 5) {
+                    handleScroll({ deltaY, preventDefault: () => e.preventDefault() });
+                    touchStartY = touchY;
+                }
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>

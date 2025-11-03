@@ -1,0 +1,9 @@
+/*Palette du site*/
+
+.background-color01 {background: #caeedd;}
+.box-color02 {color: #96b7a7;}
+.box-color03 {background: #648978;}
+.line-color04 {background: #365f4f;}
+.text-title-color05 {color: #143a2a;}
+.text-color06 {color: #071c1a;}
+.icones-color07 {background: #71bd9b;}

@@ -1,0 +1,343 @@
+/* ##################################################################### */
+/* ############################# RESSOURCES ############################ */
+/* ##################################################################### */
+
+
+
+/* ##################################################################### */
+/* ############################# VARIABLES ############################# */
+/* ##################################################################### */
+/* ~~~~~~~~~~~~~~~~ COLORS ~~~~~~~~~~~~~~~ */
+:root{
+--gt-text-light-color: #ffffff;
+--gt-background-color1: #e1e4e6;
+--gt-background-color2: #262b2c;
+--gt-box-color02: #626c6d;
+--gt-text-link-color1: #c7cece;
+--gt-text-link-color2: #6e8b8b;
+--gt-text-title-color: #1d1f1f;
+--gt-text-color-base: #000000;
+--gt-icones-contact-color: #424949;
+}
+
+/* ##################################################################### */
+/* ############################### BASES ############################### */
+/* ##################################################################### */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;  /* ✅ CRITIQUE : empêche le scroll du body */
+    background-color: var(--gt-background-color1);
+    font-family: sans-serif;
+}
+
+main {
+  margin: 0;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: none;
+    
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    @media (min-width: 800px){
+      scroll-snap-type: y mandatory;
+    }
+}
+
+main::-webkit-scrollbar {
+    display: none;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 0 ;  /* ✅ Padding sur les sections, pas sur main */
+    margin: 0;
+
+    @media (min-width: 800px){
+      scroll-snap-align: start;
+    }
+}
+
+.sec-y{
+
+  @media (min-width: 800px){
+    max-width: 100vw;
+  }
+    
+
+}
+
+.sec-x{
+  min-height: auto;
+
+  @media (min-width: 800px){    
+    max-width: 100vw;
+    min-height: 100vh;
+    
+  }
+  
+}
+@media (min-width: 800px){ 
+  .container_horizontal {
+    position: sticky;
+  
+  }
+}
+
+.container_all_elements {
+  padding: 3em 2em;
+}
+
+
+
+/* ##################################################################### */
+/* ############################ PAR SECTIONS ########################### */
+/* ##################################################################### */
+/* ~~~~~~~~~~~~~~~~ HEADER ~~~~~~~~~~~~~~~ */
+.banner{
+  margin: 0;
+}
+.banner_nav{
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0 0.5rem 0;
+
+  background-color: var(--gt-background-color2);
+
+
+}
+.banner_nav_logo svg{
+    max-width: 50px;
+    height: auto;
+    padding-top: 0.5rem;
+
+}
+
+.banner_nav_links{
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+.banner_nav_links a{
+    color: var(--gt-text-link-color1);
+}
+
+.banner_nav_links a:hover,
+.banner_nav_links a:focus,
+.banner_nav_links a:active{
+    color: var(--gt-text-link-color2);
+}
+
+.banner_text{
+    padding: 0 2rem 0 2rem;
+}
+
+.is-fixed{
+  gap: 0;
+  @media (min-width: 800px){
+    
+    position: fixed;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+
+    width: 100vw;
+    padding: 0.5em 0 0.5em 0;
+    margin-top: -1.5em;
+    
+  }
+  
+}
+
+/* ~~~~~~~~~~~~~~~~ SEC-Y ~~~~~~~~~~~~~~~~ */
+/* ------- SECTION 3 ------ */
+.section_3{
+  padding: 1em;
+  color: var(--gt-text-light-color);
+  background-color: var(--gt-background-color2);
+}
+.container_listes{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 3em;
+
+  @media (min-width: 800px){
+    grid-template-columns: repeat(3,1fr);
+    
+  }
+    
+}
+
+.container_listes ol li:nth-child(1){
+  padding-bottom: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+li{
+  list-style-type:none;
+}
+
+/* ------- SECTION 5 ------ */
+.container_sec5_form{
+    max-width: 310px;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 1em;
+    @media (min-width: 800px){
+      max-width: 700px;
+    
+  }
+}
+
+.fieldset{
+    appearance: none; 
+
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border: 2px solid var(--gt-text-color-base);
+}
+
+.formular_text{
+    display: flex;
+    flex-direction: row;
+    justify-items: stretch;
+    gap: auto;
+}
+.form_input{
+    appearance: none;
+    flex-grow: 2;
+    margin: 0 1em;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border: 2px solid var(--gt-text-color-base); 
+}
+
+[type=radio] {
+  appearance: none;
+
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid var(--gt-text-color-base);
+  transition: 0.2s all linear;
+  margin-right: 5px;
+  top: 4px;
+}
+
+.radio > label{
+  margin: 0 10px;
+}
+
+input:checked {
+  border: 6px solid var(--gt-text-color-base);
+}
+
+[type=submit]{
+  padding: 0.5rem;
+  height: 3em;
+  width: auto;
+  border: 2px solid var(--gt-text-color-base);
+  border-radius: 2em;
+  background-color: none;
+
+}
+
+[type=submit]:active,
+[type=submit]:focus,
+[type=submit]:hover {
+  background-color: var(--gt-text-color-base);
+  color: var(--gt-text-light-color);
+}
+
+/* ~~~~~~~~~~~~~~~~ SEC-X ~~~~~~~~~~~~~~~~ */
+/* ------- SECTION 2 ------ */
+
+
+.container_sec2_timeline_articles{
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+
+  @media (min-width: 800px){
+    grid-template-columns: 0;
+    grid-template-rows: 3fr 1fr;
+    
+  }
+}
+
+.container_sec2_article{
+  @media (min-width: 800px){
+    display: grid;
+    grid-template-columns: repeat(6,30vw);
+    
+  }
+}
+.article{
+  min-width: 30vw;
+  border-bottom:3px solid var(--gt-text-color-base);
+  @media (min-width: 800px){
+    max-width: 30vw;
+    min-height: 400px;
+    padding:0 3em;
+    border-bottom:4px solid var(--gt-text-color-base);
+    border-right: 4px solid var(--gt-text-color-base);
+  }
+}
+
+.article:nth-child(6){
+  border-bottom:none;
+  @media (min-width: 800px){
+    border-right:none;
+    border-bottom:4px solid var(--gt-text-color-base);
+  }  
+}
+
+.container_sec2_timeline{
+  height: 100%;
+  width: 3px;
+  margin-left: 5em;
+  
+  background-color: var(--gt-text-color-base);
+  
+  @media (min-width: 800px){
+    display: none;
+    
+  }
+}
+
+/* ------- SECTION 4 ------ */
+.section_4{
+  padding: 1em;
+  color: var(--gt-text-light-color);
+  background-color: var(--gt-background-color2);
+}
+
+/* ~~~~~~~~~~~~~~~~ FOOTER ~~~~~~~~~~~~~~~ */
+footer{
+  text-align: center;
+  font-size: small;
+  background-color: var(--gt-background-color2);
+  color: var(--gt-text-link-color1);
+}
+
+/* ##################################################################### */
+/* ############################ TYPES FONTS ############################ */
+/* ##################################################################### */
+
+
+

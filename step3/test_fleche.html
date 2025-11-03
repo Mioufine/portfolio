@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Horizontal avec Flèches</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px 20px;
+            background: #f5f5f5;
+        }
+
+        /* Container principal avec les flèches */
+        .scroll-container-wrapper {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Conteneur avec scroll horizontal */
+        .scroll-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 0;
+            /* Cache la scrollbar par défaut */
+            scrollbar-width: thin;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: #e0e0e0;
+            border-radius: 10px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        /* Exemples de cartes pour le portfolio */
+        .card {
+            min-width: 300px;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Styles des flèches */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .arrow:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .arrow:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .arrow-left {
+            left: -20px;
+        }
+
+        .arrow-right {
+            right: -20px;
+        }
+
+        .arrow svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Cache les flèches si pas nécessaire */
+        .arrow.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .arrow {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .arrow-left {
+                left: 0;
+            }
+            
+            .arrow-right {
+                right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; margin-bottom: 30px; color: #333;">Mon Portfolio</h1>
+    
+    <div class="scroll-container-wrapper">
+        <!-- Flèche gauche -->
+        <button class="arrow arrow-left" id="scrollLeft">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+        </button>
+
+        <!-- Conteneur scrollable -->
+        <div class="scroll-container" id="scrollContainer">
+            <div class="card">Projet 1</div>
+            <div class="card">Projet 2</div>
+            <div class="card">Projet 3</div>
+            <div class="card">Projet 4</div>
+            <div class="card">Projet 5</div>
+            <div class="card">Projet 6</div>
+        </div>
+
+        <!-- Flèche droite -->
+        <button class="arrow arrow-right" id="scrollRight">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        const scrollContainer = document.getElementById('scrollContainer');
+        const scrollLeftBtn = document.getElementById('scrollLeft');
+        const scrollRightBtn = document.getElementById('scrollRight');
+
+        // Distance de défilement (ajustable)
+        const scrollAmount = 320;
+
+        // Fonction pour scroller vers la gauche
+        scrollLeftBtn.addEventListener('click', () => {
+            scrollContainer.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+
+        // Fonction pour scroller vers la droite
+        scrollRightBtn.addEventListener('click', () => {
+            scrollContainer.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+
+        // Fonction pour gérer la visibilité des flèches
+        function updateArrows() {
+            const scrollLeft = scrollContainer.scrollLeft;
+            const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+            // Cache la flèche gauche si on est au début
+            if (scrollLeft <= 0) {
+                scrollLeftBtn.classList.add('hidden');
+            } else {
+                scrollLeftBtn.classList.remove('hidden');
+            }
+
+            // Cache la flèche droite si on est à la fin
+            if (scrollLeft >= maxScroll - 1) {
+                scrollRightBtn.classList.add('hidden');
+            } else {
+                scrollRightBtn.classList.remove('hidden');
+            }
+        }
+
+        // Vérifie la position au scroll
+        scrollContainer.addEventListener('scroll', updateArrows);
+
+        // Vérifie au chargement et au redimensionnement
+        window.addEventListener('load', updateArrows);
+        window.addEventListener('resize', updateArrows);
+    </script>
+</body>
+</html>
