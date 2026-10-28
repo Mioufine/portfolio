@@ -272,6 +272,9 @@ li{
 /* ~~~~~~~~~~~~~~~~ TEXTE D'ACCUEIL ~~~~~~~~~~~~~~~~ */
 .banner_text{
     padding: 0 2rem 0 2rem;
+    /* passe au-dessus de l'illustration (.banner::before) */
+    position: relative;
+    z-index: 1;
 
     /* 2 colonnes : le texte à gauche, une vide à droite ; le titre reste sur toute la largeur */
     @media (min-width: 837px){
@@ -337,6 +340,12 @@ li{
         background-size: 100% auto;
         background-position: bottom center;
       }
+    }
+
+    /* le contenu passe au-dessus de l'illustration */
+    & > .container_all_elements {
+      position: relative;
+      z-index: 1;
     }
   }
 }
@@ -727,6 +736,12 @@ li{
     background-position: bottom center;
     opacity: 1;
     z-index: 0;
+  }
+
+  /* le contenu passe au-dessus de l'illustration */
+  & > * {
+    position: relative;
+    z-index: 1;
   }
 
   @media (min-width: 837px) {
